@@ -60,4 +60,4 @@ This repository contains a collection of marketing calculators implemented in Py
 Install the required packages using:
 
 ```bash
-pip install numpy pandas openpyxl matplotlib
+pip install -r requirements.txt
