@@ -1,0 +1,9 @@
+Usage:
+
+1. Install Python: https://www.python.org/downloads/
+2. open terminal
+3. run the command: 
+pip install -r requirements.txt
+4. prepare your Attributes.xlsx and Ratings.xlsx
+5. run the command:
+python conjoint_analysis_calculator.py
