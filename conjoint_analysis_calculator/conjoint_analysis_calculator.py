@@ -83,7 +83,8 @@ def load_ratings(ratings_file):
 
 def prepare_regression_data(profiles_df, ratings_df):
     """Prepare data for regression analysis."""
-    dummy_vars = pd.get_dummies(profiles_df.drop(['Profile Number'], axis=1), drop_first=True)
+    # Include all dummy variables without dropping any levels
+    dummy_vars = pd.get_dummies(profiles_df.drop(['Profile Number'], axis=1), drop_first=False)
 
     # Ensure the number of profiles matches
     num_profiles = dummy_vars.shape[0]
@@ -105,7 +106,8 @@ def prepare_regression_data(profiles_df, ratings_df):
 
 def perform_regression(X, y, dummy_vars):
     """Perform linear regression on the combined data."""
-    model = LinearRegression()
+    # Set fit_intercept=False to handle multicollinearity
+    model = LinearRegression(fit_intercept=False)
     model.fit(X, y)
 
     coefficients = model.coef_
@@ -205,7 +207,7 @@ def main():
     if X is None:
         return
 
-    # Perform regression
+    # Perform regression 
     part_worths, intercept = perform_regression(X, y, dummy_vars)
 
     # Calculate attribute importance
