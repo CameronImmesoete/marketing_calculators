@@ -113,9 +113,9 @@ def perform_regression(X, y, dummy_vars):
     coefficients = model.coef_
     intercept = model.intercept_
 
-    # Create a DataFrame for part-worth utilities with 'Attributes' column
+    # Create a DataFrame for part-worth utilities
     part_worths = pd.DataFrame({
-        'Attributes': dummy_vars.columns,
+        'Attribute': dummy_vars.columns,
         'Part-Worth': coefficients
     })
 
@@ -126,8 +126,8 @@ def calculate_importance(part_worths, attributes):
     """Calculate attribute importance based on part-worth utilities."""
     importance = {}
     for attribute in attributes.keys():
-        levels = [col for col in part_worths.index if col.startswith(attribute)]
-        range_of_levels = part_worths[levels].max() - part_worths[levels].min()
+        levels = part_worths[part_worths['Attribute'].str.startswith(attribute)]
+        range_of_levels = levels['Part-Worth'].max() - levels['Part-Worth'].min()
         importance[attribute] = range_of_levels
 
     total_range = sum(importance.values())
@@ -140,7 +140,7 @@ def calculate_importance(part_worths, attributes):
 
 def save_results(part_worths, importance_df):
     """Save the part-worth utilities and attribute importances to CSV files."""
-    part_worths.to_csv('PartWorthUtilities.csv')
+    part_worths.to_csv('PartWorthUtilities.csv', index=False)
     importance_df.to_csv('AttributeImportances.csv', index=False)
 
     print("Conjoint analysis completed successfully.")
