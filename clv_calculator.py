@@ -52,14 +52,12 @@ def calculate_clv(
         period_clv = (margins[t] * cumulative_retention) / discount_factor
         clv_per_period.append(period_clv)
 
-    # CLV in perpetuity
-    clv_perpetuity_numerator = margins[-1] * retention_rates[-1]
-    clv_perpetuity_denominator = interest_rates[-1] + (1 - retention_rates[-1])
-    clv_in_perpetuity = clv_perpetuity_numerator / clv_perpetuity_denominator
-    clv_in_perpetuity /= (1 + interest_rates[-1]) ** periods  # Discount to present value
-
     # Total CLV over periods
     total_clv = sum(clv_per_period)
+
+    # CLV in perpetuity using the formula:
+    # CLV = (Margin * Retention Rate) / (1 + Discount Rate - Retention Rate)
+    clv_in_perpetuity = (margins[-1] * retention_rates[-1]) / (1 + interest_rates[-1] - retention_rates[-1])
 
     # Prepare results
     results = {
