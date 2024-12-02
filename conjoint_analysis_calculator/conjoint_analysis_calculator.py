@@ -114,7 +114,7 @@ def perform_regression(X, y, dummy_vars):
     intercept = model.intercept_
 
     # Create a Series for part-worth utilities
-    part_worths = pd.Series(coefficients, index=dummy_vars.columns)
+    part_worths = pd.Series(coefficients, index=dummy_vars.columns, name='Part-Worth')
 
     return part_worths, intercept
 
