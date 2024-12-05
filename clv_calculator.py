@@ -56,8 +56,8 @@ def calculate_clv(
     total_clv = sum(clv_per_period)
 
     # CLV in perpetuity using the formula:
-    # CLV = (Margin * Retention Rate) / (1 + Discount Rate - Retention Rate)
-    clv_in_perpetuity = (margins[-1] * retention_rates[-1]) / (1 + interest_rates[-1] - retention_rates[-1])
+    # CLV = (Margin) / (1 + Discount Rate - Retention Rate)
+    clv_in_perpetuity = (margins[-1]) / (1 + interest_rates[-1] - retention_rates[-1])
 
     # Prepare results
     results = {
