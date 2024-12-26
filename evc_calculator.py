@@ -26,9 +26,9 @@ def main():
 
     # Parse command-line arguments
     parser = argparse.ArgumentParser(description='Calculate Economic Value to the Customer (EVC).')
-    parser.add_argument('reference_value', type=float, help='Price of the next best alternative')
-    parser.add_argument('positive_diff', type=float, help='Monetary value of the positive differentiation')
-    parser.add_argument('negative_diff', type=float, help='Monetary value of the negative differentiation (expects negative value)')
+    parser.add_argument('--reference_value', type=float, help='Price of the next best alternative')
+    parser.add_argument('--positive_diff', type=float, help='Monetary value of the positive differentiation')
+    parser.add_argument('--negative_diff', type=float, help='Monetary value of the negative differentiation (expects negative value)')
     args = parser.parse_args()
 
     reference_value = args.reference_value
