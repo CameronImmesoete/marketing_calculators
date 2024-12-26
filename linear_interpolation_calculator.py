@@ -29,11 +29,11 @@ def main():
 
     # Parse command-line arguments
     parser = argparse.ArgumentParser(description="Linear Interpolation Calculator")
-    parser.add_argument("--x1", type=float, help="First X value")
-    parser.add_argument("--x2", type=float, help="Second X value")
-    parser.add_argument("--y1", type=float, help="Y value corresponding to X1")
-    parser.add_argument("--y2", type=float, help="Y value corresponding to X2")
-    parser.add_argument("--y3", type=float, help="Y value for which to find corresponding X")
+    parser.add_argument("--x1", type=float, default=100, help="First X value")
+    parser.add_argument("--x2", type=float, default=200, help="Second X value")
+    parser.add_argument("--y1", type=float, default=50, help="Y value corresponding to X1")
+    parser.add_argument("--y2", type=float, default=100, help="Y value corresponding to X2")
+    parser.add_argument("--y3", type=float, default=75, help="Y value for which to find corresponding X")
     args = parser.parse_args()
 
     x1 = args.x1
