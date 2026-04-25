@@ -1,7 +1,8 @@
 # relative_importance_calculator.py
 
-import pandas as pd
 import os
+
+import pandas as pd
 
 
 def calculate_relative_importance(data):
@@ -14,9 +15,12 @@ def calculate_relative_importance(data):
     Returns:
         pd.DataFrame: DataFrame with calculated differences and relative importances.
     """
-    data['Difference'] = data['Max'] - data['Min']
-    total_difference = data['Difference'].sum()
-    data['Relative Importance (%)'] = (data['Difference'] / total_difference) * 100
+    data["Difference"] = data["Max"] - data["Min"]
+    total_difference = data["Difference"].sum()
+    if total_difference == 0:
+        data["Relative Importance (%)"] = 0.0
+    else:
+        data["Relative Importance (%)"] = (data["Difference"] / total_difference) * 100
     return data
 
 
@@ -28,18 +32,18 @@ def main():
 
     # Define file paths
     script_dir = os.path.dirname(os.path.abspath(__file__))
-    importance_file = os.path.join(script_dir, 'RelativeImportance.xlsx')
+    importance_file = os.path.join(script_dir, "RelativeImportance.xlsx")
     if not os.path.exists(importance_file):
-        importance_file = os.path.join(script_dir, 'RelativeImportance.csv')
+        importance_file = os.path.join(script_dir, "RelativeImportance.csv")
         if not os.path.exists(importance_file):
             print("Error: Neither 'RelativeImportance.xlsx' nor 'RelativeImportance.csv' found.")
             return
 
     # Load data
     try:
-        if importance_file.endswith('.xlsx'):
+        if importance_file.endswith(".xlsx"):
             data = pd.read_excel(importance_file)
-        elif importance_file.endswith('.csv'):
+        elif importance_file.endswith(".csv"):
             data = pd.read_csv(importance_file)
         else:
             print(f"Error: Unsupported file format for {importance_file}")
@@ -49,7 +53,7 @@ def main():
         return
 
     # Validate data
-    required_columns = {'Feature', 'Max', 'Min'}
+    required_columns = {"Feature", "Max", "Min"}
     if not required_columns.issubset(data.columns):
         print(f"Error: Input file must contain columns: {required_columns}")
         return
@@ -58,7 +62,7 @@ def main():
     result = calculate_relative_importance(data)
 
     # Save results
-    result_file = 'RelativeImportanceResults.csv'
+    result_file = "RelativeImportanceResults.csv"
     result.to_csv(result_file, index=False)
     print(f"\nRelative importance calculations saved to {result_file}.")
 
@@ -67,5 +71,5 @@ def main():
     print(result)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

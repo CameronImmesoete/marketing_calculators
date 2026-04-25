@@ -2,6 +2,7 @@ import argparse
 
 # evc_calculator.py
 
+
 def calculate_evc(reference_value, positive_diff, negative_diff):
     """
     Calculate Economic Value to the Customer (EVC).
@@ -25,10 +26,17 @@ def main():
     print("Starting Economic Value to the Customer (EVC) Calculator...")
 
     # Parse command-line arguments
-    parser = argparse.ArgumentParser(description='Calculate Economic Value to the Customer (EVC).')
-    parser.add_argument('--reference_value', type=float, default=100, help='Price of the next best alternative')
-    parser.add_argument('--positive_diff', type=float, default=25, help='Monetary value of the positive differentiation')
-    parser.add_argument('--negative_diff', type=float, default=-15, help='Monetary value of the negative differentiation (expects negative value)')
+    parser = argparse.ArgumentParser(description="Calculate Economic Value to the Customer (EVC).")
+    parser.add_argument("--reference_value", type=float, default=100, help="Price of the next best alternative")
+    parser.add_argument(
+        "--positive_diff", type=float, default=25, help="Monetary value of the positive differentiation"
+    )
+    parser.add_argument(
+        "--negative_diff",
+        type=float,
+        default=-15,
+        help="Monetary value of the negative differentiation (expects negative value)",
+    )
     args = parser.parse_args()
 
     reference_value = args.reference_value
@@ -39,9 +47,9 @@ def main():
     evc = calculate_evc(reference_value, positive_diff, negative_diff)
 
     # Output results
-    print(f"\nEVC Calculation Result:")
+    print("\nEVC Calculation Result:")
     print(f"EVC: ${evc:.2f}")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
