@@ -2,6 +2,7 @@ import argparse
 
 # linear_interpolation_calculator.py
 
+
 def linear_interpolate(x1, x2, y1, y2, y3):
     """
     Perform linear interpolation to find X corresponding to a given Y.
@@ -46,9 +47,9 @@ def main():
     x3 = linear_interpolate(x1, x2, y1, y2, y3)
 
     # Output result
-    print(f"\nLinear Interpolation Result:")
+    print("\nLinear Interpolation Result:")
     print(f"The X value corresponding to Y = {y3} is X = {x3:.2f}")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

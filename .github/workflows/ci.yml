@@ -1,0 +1,14 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  ci:
+    uses: CameronImmesoete/.github/.github/workflows/python-ci.yml@8baa2294b21d0941b607af283ee9ee3ea14a2f35 # main 2026-04-25

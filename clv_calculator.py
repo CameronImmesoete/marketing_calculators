@@ -1,6 +1,5 @@
 # clv_calculator.py
 
-import numpy as np
 import argparse
 
 
@@ -9,7 +8,7 @@ def calculate_clv(
     retention_rate=0.8,
     interest_rate=0.1,
     periods=5,
-    time_unit='years',
+    time_unit="years",
     margins_over_time=None,
     retention_rates_over_time=None,
     interest_rates_over_time=None,
@@ -61,10 +60,10 @@ def calculate_clv(
 
     # Prepare results
     results = {
-        'CLV per Period': clv_per_period,
-        'Total CLV over Periods': total_clv,
-        'CLV in Perpetuity': clv_in_perpetuity,
-        'Time Unit': time_unit,
+        "CLV per Period": clv_per_period,
+        "Total CLV over Periods": total_clv,
+        "CLV in Perpetuity": clv_in_perpetuity,
+        "Time Unit": time_unit,
     }
 
     return results
@@ -81,19 +80,23 @@ def main():
     retention_rate = 0.8
     interest_rate = 0.1
     periods = 5
-    time_unit = 'years'
+    time_unit = "years"
 
     # Collect user inputs
     parser = argparse.ArgumentParser(description="Customer Lifetime Value (CLV) Calculator")
 
-    parser.add_argument('--margin', type=float, default=margin, help='Margin per customer')
-    parser.add_argument('--retention_rate', type=float, default=retention_rate, help='Retention rate as a decimal')
-    parser.add_argument('--interest_rate', type=float, default=interest_rate, help='Interest rate as a decimal')
-    parser.add_argument('--periods', type=int, default=periods, help='Number of periods (optional)')
-    parser.add_argument('--time_unit', type=str, default=time_unit, help='Unit of time (e.g., years, months)')
-    parser.add_argument('--margins_over_time', type=float, nargs='*', help='List of margins for each period')
-    parser.add_argument('--retention_rates_over_time', type=float, nargs='*', help='List of retention rates for each period')
-    parser.add_argument('--interest_rates_over_time', type=float, nargs='*', help='List of interest rates for each period')
+    parser.add_argument("--margin", type=float, default=margin, help="Margin per customer")
+    parser.add_argument("--retention_rate", type=float, default=retention_rate, help="Retention rate as a decimal")
+    parser.add_argument("--interest_rate", type=float, default=interest_rate, help="Interest rate as a decimal")
+    parser.add_argument("--periods", type=int, default=periods, help="Number of periods (optional)")
+    parser.add_argument("--time_unit", type=str, default=time_unit, help="Unit of time (e.g., years, months)")
+    parser.add_argument("--margins_over_time", type=float, nargs="*", help="List of margins for each period")
+    parser.add_argument(
+        "--retention_rates_over_time", type=float, nargs="*", help="List of retention rates for each period"
+    )
+    parser.add_argument(
+        "--interest_rates_over_time", type=float, nargs="*", help="List of interest rates for each period"
+    )
 
     args = parser.parse_args()
 
@@ -103,8 +106,12 @@ def main():
     periods = args.periods
     time_unit = args.time_unit
     margins_over_time = args.margins_over_time if args.margins_over_time else [margin] * periods
-    retention_rates_over_time = args.retention_rates_over_time if args.retention_rates_over_time else [retention_rate] * periods
-    interest_rates_over_time = args.interest_rates_over_time if args.interest_rates_over_time else [interest_rate] * periods
+    retention_rates_over_time = (
+        args.retention_rates_over_time if args.retention_rates_over_time else [retention_rate] * periods
+    )
+    interest_rates_over_time = (
+        args.interest_rates_over_time if args.interest_rates_over_time else [interest_rate] * periods
+    )
 
     # Calculate CLV
     results = calculate_clv(
@@ -120,7 +127,7 @@ def main():
 
     # Output results
     print("\nCLV Calculation Results:")
-    for i, clv in enumerate(results['CLV per Period']):
+    for i, clv in enumerate(results["CLV per Period"]):
         if periods <= 10 or i >= periods - 1:
             print(f"CLV {results['Time Unit'].capitalize()} {i + 1}: ${clv:.2f}")
 
@@ -128,5 +135,5 @@ def main():
     print(f"CLV in Perpetuity: ${results['CLV in Perpetuity']:.2f}")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
