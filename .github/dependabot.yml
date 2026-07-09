@@ -5,5 +5,11 @@ updates:
     schedule:
       interval: weekly
     groups:
-      all:
-        patterns: ["*"]
+      # Batch ONLY minor+patch version bumps into one low-risk PR.
+      # No `patterns` key = defaults to all deps; `update-types` restricts to
+      # minor+patch, so every MAJOR bump falls out into its own PR (never traps siblings).
+      minor-and-patch:
+        applies-to: version-updates
+        update-types: ["minor", "patch"]
+    # Security updates intentionally NOT grouped (Dependabot default) ->
+    # each security PR arrives isolated at the minimal safe version.
